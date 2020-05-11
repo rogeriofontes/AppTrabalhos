@@ -13,8 +13,8 @@ import br.com.unipac.apptrabalhos.model.domain.Aluno;
 import br.com.unipac.apptrabalhos.model.repository.AlunoRepository;
 
 public class AlunoForm extends AppCompatActivity {
-    EditText nameEdt, registerEdt;
-    Button saveBtn;
+    private ViewHolder viewHolder = new ViewHolder();
+
     private AlunoRepository alunoRepository = null;
 
     @Override
@@ -22,19 +22,20 @@ public class AlunoForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aluno_form);
 
-        nameEdt = (EditText) findViewById(R.id.nameEdt);
-        registerEdt = (EditText) findViewById(R.id.registerEdt);
-        saveBtn = (Button) findViewById(R.id.saveBtn);
+        this.viewHolder.nameEdt = (EditText) findViewById(R.id.nameEdt);
+        this.viewHolder.registerEdt = (EditText) findViewById(R.id.registerEdt);
+        this.viewHolder.saveBtn = (Button) findViewById(R.id.saveBtn);
 
         alunoRepository = new AlunoRepository(this);
 
 
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+        this.viewHolder.saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Aluno aluno = new Aluno();
-                aluno.setName(nameEdt.getText().toString());
-                aluno.setRegister(Integer.parseInt(registerEdt.getText().toString()));
+
+                String name = AlunoForm.this.viewHolder.nameEdt.getText().toString();
+                int register = Integer.parseInt(AlunoForm.this.viewHolder.registerEdt.getText().toString());
+                Aluno aluno = getAluno(name, register);
 
                 boolean save = alunoRepository.save(aluno);
                 if (save) {
@@ -45,5 +46,17 @@ public class AlunoForm extends AppCompatActivity {
             }
         });
 
+    }
+
+    private Aluno getAluno(String name, int register) {
+        Aluno aluno = new Aluno();
+        aluno.setName(name);
+        aluno.setRegister(register);
+        return aluno;
+    }
+
+    public static class ViewHolder {
+        EditText nameEdt, registerEdt;
+        Button saveBtn;
     }
 }
