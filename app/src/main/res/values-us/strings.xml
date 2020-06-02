@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AppTrabalhos</string>
+    <string name="menu_add">add</string>
+    <string name="menu_list">list</string>
+    <string name="menu_edit">edit</string>
+    <string name="menu_form_add">add</string>
+    <string name="menu_form_list">list 1</string>
+    <string name="menu_form_edit">edit 1</string>
+    <string name="name">Name</string>
+    <string name="register">Register</string>
+    <string name="save">Save</string>
+</resources>

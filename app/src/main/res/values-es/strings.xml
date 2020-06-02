@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">AppTrabalhos</string>
-    <string name="menu_add">Cadastrar</string>
-    <string name="menu_list">Listar</string>
-    <string name="menu_edit">Editar</string>
+    <string name="menu_add">Registrar</string>
+    <string name="menu_list">lista</string>
+    <string name="menu_edit">Para editar</string>
     <string name="menu_form_add">Cadastrar</string>
     <string name="menu_form_list">Listar 1</string>
     <string name="menu_form_edit">Editar 1</string>
     <string name="name">Nome</string>
-    <string name="register">Matricula</string>
-    <string name="save">Salvar</string>
-    <string name="menu_sms">SMS</string>
+    <string name="register">Registro</string>
+    <string name="save">Ahorrar</string>
 </resources>

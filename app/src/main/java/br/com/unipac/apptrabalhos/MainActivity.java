@@ -1,20 +1,23 @@
 package br.com.unipac.apptrabalhos;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import java.util.List;
 
-import br.com.unipac.apptrabalhos.infra.DBHelper;
 import br.com.unipac.apptrabalhos.model.domain.Aluno;
 import br.com.unipac.apptrabalhos.model.repository.AlunoRepository;
 import br.com.unipac.apptrabalhos.ui.AlunoForm;
@@ -77,8 +80,35 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menuList:
                 Toast.makeText(this, "Não tenho lista", Toast.LENGTH_SHORT).show();
                 return true;
+            case R.id.menuSms:
+                sendSMS("3499999999", "@rogeriofontes" + "|" + "Ola mundo SMS" );
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public boolean isPermissaoParaEnviarSms() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void sendSMS(String numero, String messagem) {
+
+        if (isPermissaoParaEnviarSms()) {
+            try{
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(numero, null, messagem, null, null);
+                Toast.makeText(this, "Mensagem Enviada", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
+                Log.e("ERROR", e.getMessage());
+                e.fillInStackTrace();
+            }
+        } else {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 10);
+            }
+        }
+
     }
 }

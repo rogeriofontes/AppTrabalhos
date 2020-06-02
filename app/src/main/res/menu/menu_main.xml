@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="br.com.unipac.apptrabalhos.MainActivity">
+
+    <item
+        android:id="@+id/menuAdd"
+        android:title="@string/menu_form_add" />
+    <item
+        android:id="@+id/menuSms"
+        android:title="@string/menu_sms"
+        />
+    <item android:id="@+id/menuList"
+        android:title="@string/menu_form_list" />
+</menu>
